@@ -13,9 +13,12 @@ class PokemonEntity(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True)
-    
+
     lat = models.FloatField(null=True, blank=True)
     lon = models.FloatField(null=True, blank=True)
+
+    appeared_at = models.DateTimeField(null=True, blank=True)
+    disappeared_at = models.DateTimeField(null=True, blank=True)
 
 
     def __str__(self):

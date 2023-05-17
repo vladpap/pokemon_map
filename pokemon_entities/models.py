@@ -9,9 +9,15 @@ class Pokemon(models.Model):
         return self.title
 
 class PokemonEntity(models.Model):
+    pokemon = models.ForeignKey(Pokemon,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True)
+    
     lat = models.FloatField(null=True, blank=True)
     lon = models.FloatField(null=True, blank=True)
 
 
     def __str__(self):
-        return f'lat: {self.lat}, lon: {self.lon}'
+        return'Pokemon: {}, lat: {}, lon: {}'.format(
+            self.pokemon.title, self.lat, self.lon)

@@ -79,6 +79,8 @@ def show_pokemon(request, pokemon_id):
             'img_url': request.build_absolute_uri(f'/media/{pokemon.image}'),
             'title_ru': pokemon.title,
             'description': pokemon.description,
+            'title_en': pokemon.title_en,
+            'title_jp': pokemon.title_jp,
         }
     return render(request, 'pokemon.html', context={
         'map': folium_map._repr_html_(), 'pokemon': pokemon_on_page

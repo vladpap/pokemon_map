@@ -1,5 +1,4 @@
 import folium
-import json
 
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
@@ -47,8 +46,8 @@ def show_all_pokemons(request):
         add_pokemon(
             folium_map, pokemon_entity.lat,
             pokemon_entity.lon,
-            request.build_absolute_uri(f'/media/{pokemon_entity.pokemon.image}')
-        )
+            request.build_absolute_uri(
+                f'/media/{pokemon_entity.pokemon.image}'))
 
     return render(request, 'mainpage.html', context={
         'map': folium_map._repr_html_(),
@@ -71,8 +70,8 @@ def show_pokemon(request, pokemon_id):
         add_pokemon(
             folium_map, pokemon_entity.lat,
             pokemon_entity.lon,
-            request.build_absolute_uri(f'/media/{pokemon_entity.pokemon.image}')
-        )
+            request.build_absolute_uri(
+                f'/media/{pokemon_entity.pokemon.image}'))
 
     pokemon_on_page = {
             'pokemon_id': pokemon.id,
@@ -86,7 +85,8 @@ def show_pokemon(request, pokemon_id):
         print(f'Previous_evolution: {pokemon.previous_evolution}')
         pokemon_on_page['previous_evolution'] = {
                     'pokemon_id': pokemon.previous_evolution.id,
-                    'img_url': request.build_absolute_uri(f'/media/{pokemon.previous_evolution.image}'),
+                    'img_url': request.build_absolute_uri(
+                        f'/media/{pokemon.previous_evolution.image}'),
                     'title_ru': pokemon.previous_evolution.title,
                     }
     if pokemon.next_evolution.exists():
@@ -94,10 +94,10 @@ def show_pokemon(request, pokemon_id):
         next_evolution = pokemon.next_evolution.first()
         pokemon_on_page['next_evolution'] = {
                     'pokemon_id': next_evolution.id,
-                    'img_url': request.build_absolute_uri(f'/media/{next_evolution.image}'),
+                    'img_url': request.build_absolute_uri(
+                        f'/media/{next_evolution.image}'),
                     'title_ru': next_evolution.title,
                 }
-
 
     return render(request, 'pokemon.html', context={
         'map': folium_map._repr_html_(), 'pokemon': pokemon_on_page

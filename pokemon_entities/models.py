@@ -6,10 +6,15 @@ class Pokemon(models.Model):
     description = models.TextField(default='')
     title_en = models.CharField(max_length=200, default='')
     title_jp = models.CharField(max_length=200, default='')
-
+    previous_evolution = models.ForeignKey('self',
+            on_delete=models.SET_NULL,
+            related_name='next_evolution',
+            null=True,
+            default=None)
 
     def __str__(self):
         return self.title
+
 
 class PokemonEntity(models.Model):
     pokemon = models.ForeignKey(Pokemon,

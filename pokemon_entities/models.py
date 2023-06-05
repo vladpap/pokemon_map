@@ -1,19 +1,24 @@
 from django.db import models
+from django.utils.timezone import localtime
 
 
 class Pokemon(models.Model):
     title = models.CharField('Название', max_length=200)
-    title_en = models.CharField('Название анг.', max_length=200, default='')
-    title_jp = models.CharField('Название яп.', max_length=200, default='')
-    image = models.ImageField('Картинка', null=True, blank=True)
-    description = models.TextField('Описание', default='')
+    title_en = models.CharField('Название анг.',
+        max_length=200, default='', blank=True)
+    title_jp = models.CharField('Название яп.',
+        max_length=200, default='', blank=True)
+    image = models.ImageField('Картинка', null=True)
+    description = models.TextField('Описание',
+        default='', blank=True)
     previous_evolution = models.ForeignKey(
             'self',
             verbose_name='Из кого эволюционирует',
             on_delete=models.SET_NULL,
             related_name='next_evolution',
             null=True,
-            default=None)
+            default=None,
+            blank=True)
 
     def __str__(self):
         return self.title
@@ -24,20 +29,19 @@ class PokemonEntity(models.Model):
         Pokemon,
         verbose_name='Покемон',
         on_delete=models.CASCADE,
-        null=True,
-        blank=True)
+        )
 
-    lat = models.FloatField('Координаты, широта', null=True, blank=True)
-    lon = models.FloatField('Координаты, долгота', null=True, blank=True)
+    lat = models.FloatField('Координаты, широта')
+    lon = models.FloatField('Координаты, долгота')
 
     appeared_at = models.DateTimeField(
         verbose_name='Время оживления',
-        null=True,
-        blank=True)
+        blank=True,
+        default=localtime())
     disappeared_at = models.DateTimeField(
         verbose_name='Время исчезновения',
-        null=True,
-        blank=True)
+        blank=True,
+        default=localtime())
 
     level = models.IntegerField('Уровень', null=True, blank=True)
     health = models.IntegerField('Здоровье', null=True, blank=True)

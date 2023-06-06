@@ -4,13 +4,10 @@ from django.utils.timezone import localtime
 
 class Pokemon(models.Model):
     title = models.CharField('Название', max_length=200)
-    title_en = models.CharField('Название анг.',
-        max_length=200, default='', blank=True)
-    title_jp = models.CharField('Название яп.',
-        max_length=200, default='', blank=True)
+    title_en = models.CharField('Название анг.', max_length=200, blank=True)
+    title_jp = models.CharField('Название яп.', max_length=200, blank=True)
     image = models.ImageField('Картинка', null=True)
-    description = models.TextField('Описание',
-        default='', blank=True)
+    description = models.TextField('Описание', blank=True)
     previous_evolution = models.ForeignKey(
             'self',
             verbose_name='Из кого эволюционирует',

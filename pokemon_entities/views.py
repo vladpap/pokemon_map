@@ -56,7 +56,6 @@ def show_all_pokemons(request):
 
 
 def show_pokemon(request, pokemon_id):
-    print(f'Pokemon ID: {pokemon_id}')
     pokemon = Pokemon.objects.get(id=pokemon_id)
     if not pokemon:
         return HttpResponseNotFound('<h1>Такой покемон не найден</h1>')
@@ -82,14 +81,12 @@ def show_pokemon(request, pokemon_id):
             'title_jp': pokemon.title_jp,
         }
     if pokemon.previous_evolution:
-        print(f'Previous_evolution: {pokemon.previous_evolution}')
         pokemon_on_page['previous_evolution'] = {
                     'pokemon_id': pokemon.previous_evolution.id,
                     'img_url': pokemon.previous_evolution.image.url,
                     'title_ru': pokemon.previous_evolution.title,
                     }
     if pokemon.next_evolutions.exists():
-        print(f'Next_evolution: {pokemon.next_evolutions}')
         next_evolution = pokemon.next_evolutions.first()
         pokemon_on_page['next_evolution'] = {
                     'pokemon_id': next_evolution.id,

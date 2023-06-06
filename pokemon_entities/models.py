@@ -33,12 +33,10 @@ class PokemonEntity(models.Model):
 
     appeared_at = models.DateTimeField(
         verbose_name='Время оживления',
-        blank=True,
-        default=localtime())
+        blank=True)
     disappeared_at = models.DateTimeField(
         verbose_name='Время исчезновения',
-        blank=True,
-        default=localtime())
+        blank=True)
 
     level = models.IntegerField('Уровень', null=True, blank=True)
     health = models.IntegerField('Здоровье', null=True, blank=True)

@@ -89,9 +89,9 @@ def show_pokemon(request, pokemon_id):
                         f'/media/{pokemon.previous_evolution.image}'),
                     'title_ru': pokemon.previous_evolution.title,
                     }
-    if pokemon.next_evolution.exists():
-        print(f'Next_evolution: {pokemon.next_evolution}')
-        next_evolution = pokemon.next_evolution.first()
+    if pokemon.next_evolutions.exists():
+        print(f'Next_evolution: {pokemon.next_evolutions}')
+        next_evolution = pokemon.next_evolutions.first()
         pokemon_on_page['next_evolution'] = {
                     'pokemon_id': next_evolution.id,
                     'img_url': request.build_absolute_uri(
